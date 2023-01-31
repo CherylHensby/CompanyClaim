@@ -7,11 +7,18 @@ namespace CompanyClaimsAPI.Tests
     [TestClass]
     public class DataLayerTests
     {
+        /// <summary>
+        /// DataLayer Unit Tests using Moq, to mock the dataLayer clas
+        /// </summary>
 
-        private readonly Mock<IDataLayer> _mockedDataLayer = new Mock<IDataLayer>();
-  
+        private readonly Mock<IDataLayer> _mockDataLayer = new Mock<IDataLayer>();
+
+        /// <summary>
+        /// •	We need at least one unit test to be created
+        /// Unit Test calling the GetClaimByUcrAsync which gets the claim from passing the 'UCR' property
+        /// </summary>
         [TestMethod]
-        public async void DataLayer_Claims_GetClaimByUcrAsync()
+        public void DataLayer_GetClaimByUcrAsync()
         {
 
             // Arrange
@@ -20,13 +27,12 @@ namespace CompanyClaimsAPI.Tests
 
 
             // Act
-            var claimByUcr = _mockedDataLayer.Setup(c => c.GetClaimByUcrAsync("4444")).ReturnsAsync(claim1);
+            var claimByUcr = _mockDataLayer.Setup(c => c.GetClaimByUcrAsync("4444")).ReturnsAsync(claim1);
 
 
             // Assert
 
-            Assert.Equals(_ucr, claim1.UCR);
-
+            Assert.AreEqual(_ucr, claim1.UCR);
         }
     }
 }

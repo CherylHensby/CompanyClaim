@@ -1,4 +1,5 @@
-﻿using CompanyClaimsAPI.Data.Interfaces;
+﻿using CompanyClaimsAPI.Data;
+using CompanyClaimsAPI.Data.Interfaces;
 using CompanyClaimsAPI.Models;
 using CompanyClaimsAPI.Services.Interfaces;
 using Microsoft.Rest;
@@ -111,7 +112,54 @@ namespace CompanyClaimsAPI.Services
                     return new HttpOperationResponse<Claim>()
                     {
                         Body = null,
-                        Response = new HttpResponseMessage(HttpStatusCode.InternalServerError)
+                        Response = new HttpResponseMessage(HttpStatusCode.Unauthorized)
+                    };
+                }
+
+            }
+            catch (Exception)
+            {
+                return new HttpOperationResponse<Claim>()
+                {
+                    Body = null,
+                    Response = new HttpResponseMessage(HttpStatusCode.InternalServerError)
+                };
+            }
+
+        }
+
+
+        public async Task<HttpOperationResponse<Claim>> UpdateFakeClaim(string ucr, Claim claim)
+        {
+            try
+            {
+                IRepository repository = new FakeRepository();
+                if (claim != null && claim.UCR != null)
+                {
+                    var updatedFakeClaim = repository.AddClaim(claim);
+                    if (updatedFakeClaim != null && updatedFakeClaim.UCR != null)
+                    {
+                        return new HttpOperationResponse<Claim>()
+                        {
+                            Body = updatedFakeClaim,
+                            Response = new HttpResponseMessage(HttpStatusCode.OK)
+                        };
+                    }
+                    else
+                    {
+                        return new HttpOperationResponse<Claim>()
+                        {
+                            Body = null,
+                            Response = new HttpResponseMessage(HttpStatusCode.NotModified)
+                        };
+                    }
+                }
+                else
+                {
+                    return new HttpOperationResponse<Claim>()
+                    {
+                        Body = null,
+                        Response = new HttpResponseMessage(HttpStatusCode.Unauthorized)
                     };
                 }
 

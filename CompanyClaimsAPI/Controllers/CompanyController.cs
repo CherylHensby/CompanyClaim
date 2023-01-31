@@ -36,6 +36,12 @@ namespace CompanyClaimsAPI.Controllers
                     : new Exception(responseContent);
             }
         }
+
+        /// <summary>
+        /// •	We need an endpoint that will give me a single company. We need a property to be returned that will tell us if the company has an active insurance policy
+        /// </summary>
+        /// <param name="companyId"></param>
+        /// <returns></returns>
         [HttpGet("Get Company by ID")]
         [SwaggerOperation(Summary = "Get Company by ID")]
         [SwaggerResponse((int)HttpStatusCode.NoContent)]

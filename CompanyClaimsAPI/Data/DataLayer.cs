@@ -3,6 +3,9 @@ using CompanyClaimsAPI.Models;
 
 namespace CompanyClaimsAPI.Data
 {
+    /// <summary>
+    /// This is a mocked data of a datalayer, mimicing repository for database 
+    /// </summary>
     public class DataLayer : IDataLayer
     {
 
@@ -12,13 +15,13 @@ namespace CompanyClaimsAPI.Data
             return Task.FromResult(companyList);
         }
 
-        private List<Claim> GetAllCompanyClaims(int companyId)
+        public List<Claim> GetAllCompanyClaims(int companyId)
         {
             List<Claim> claims = GetFullClaimsList().Where(cl => cl.CompanyId == companyId).ToList();
             return claims;
         }
 
-        private List<Company> GetAllCompanies()
+        public List<Company> GetAllCompanies()
         {
             List<Company> companies= new List<Company>();
             DateTime fistCdt = DateTime.ParseExact("11/06/2024 10:00:00", "dd/MM/yyyy HH:mm:ss", null);
@@ -120,11 +123,11 @@ namespace CompanyClaimsAPI.Data
 
         public Claim UpdateClaim(string ucr, Claim claimToUpdate)
         {
-            SaveChanges();
+            SaveClaimChanges();
             return claimToUpdate;
         }
 
-        public void SaveChanges()
+        public void SaveClaimChanges()
         {
             //throw new NotImplementedException();
         }

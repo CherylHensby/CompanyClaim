@@ -5,7 +5,12 @@ namespace CompanyClaimsAPI.Services.Interfaces
 {
     public interface ICompanyService
     {
-        Task<HttpOperationResponse<Company>> GetCompanyAsync(int companyId);
+        /// <summary>
+        /// Gets the Company of the company Id passed
+        /// </summary>
+        /// <param name="companyId"></param>
+        /// <returns></returns>
+        Task<HttpOperationResponse<Company>> GetCompanyAsync(int Id);
 
     }
 }
