@@ -12,6 +12,8 @@ namespace CompanyClaimsAPI.Controllers
     [Route("api/[controller]")]
     public class ClaimController : ControllerBase
     {
+        //ToDO: Fix problem with not being able to inject datalayer or claimservice interfaces into constructor of controller, as added them to services in startup! No time to sort, but must!
+        public ClaimController() { }
         /// <summary>
         /// •	We need an endpoint that will give me a list of claims for one company
         /// </summary>

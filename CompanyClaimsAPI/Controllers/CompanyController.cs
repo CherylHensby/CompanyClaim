@@ -12,6 +12,8 @@ namespace CompanyClaimsAPI.Controllers
     [ApiController]
     public class CompanyController : ControllerBase
     {
+        //ToDO: Fix problem with not being able to inject datalayer or companyservice interfaces into constructor of controller, as added them to services in startup! No time to sort, but must!
+        public CompanyController() { }
 
         [HttpGet("Is Company Active")]
         [SwaggerOperation(Summary = "Is Company Active")]
